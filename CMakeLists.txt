@@ -132,7 +132,7 @@ if (ZMQPP_BUILD_SHARED)
 endif() # ZMQPP_BUILD_SHARED
 
 include(GenerateExportHeader)
-generate_export_header(zmqpp)
+#generate_export_header(zmqpp)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Examples
