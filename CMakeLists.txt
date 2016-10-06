@@ -143,7 +143,13 @@ if(WIN32)
 endif() # WIN32
 
 include(GenerateExportHeader)
-#generate_export_header(zmqpp)
+
+if (ZMQPP_BUILD_STATIC)
+	generate_export_header(zmqpp-static BASE_NAME "zmqpp" )
+else()
+	generate_export_header(zmqpp)
+endif()
+
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Examples
