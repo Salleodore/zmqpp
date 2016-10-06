@@ -18,7 +18,13 @@ enable_testing()
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
 # show all warnings
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
+
+# Set compiler flags that don't work on Windows
+if(NOT MSVC)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
+endif()
+
 
 # Set a consistent MACOSX_RPATH default across all CMake versions.  When CMake
 # 2.8.12 is required, change this default to 1.  When CMake 3.0.0 is required,
@@ -130,6 +136,11 @@ if (ZMQPP_BUILD_SHARED)
   list( APPEND INSTALL_TARGET_LIST zmqpp)
   set( LIB_TO_LINK_TO_EXAMPLES zmqpp )
 endif() # ZMQPP_BUILD_SHARED
+
+# We need to link zmqpp to ws2_32 on windows for the implementation of winsock2.h
+if(WIN32)
+	target_link_libraries(zmqpp ws2_32)
+endif() # WIN32
 
 include(GenerateExportHeader)
 #generate_export_header(zmqpp)
