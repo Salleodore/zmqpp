@@ -24,6 +24,9 @@
 #elif defined(_WIN32) // Byte ordering on Windows
 
 #if BYTE_ORDER == LITTLE_ENDIAN
+#	if !defined(NOMINMAX) && defined(_MSC_VER)
+#		define NOMINMAX
+#	endif
 #include <winsock2.h>
 #define HOST_TO_BIG_ENDIAN_32(x) htonl(x)
 

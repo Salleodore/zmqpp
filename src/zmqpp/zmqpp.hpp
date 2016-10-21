@@ -56,6 +56,10 @@
  */
 #define	ZMQPP_VERSION_REVISION 1
 
+
+#if !defined(NOMINMAX) && defined(_MSC_VER)
+#	define NOMINMAX
+#endif
 #include <zmq.h>
 
 #include "compatibility.hpp"

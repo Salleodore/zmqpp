@@ -20,7 +20,10 @@
 #include "z85.hpp"
 #include "byte_ordering.hpp"
 #include <unordered_map>
+
+#ifndef WIN32
 #include <netinet/in.h>
+#endif
 
 #ifdef __APPLE__
 

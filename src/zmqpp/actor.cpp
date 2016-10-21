@@ -60,7 +60,9 @@ namespace zmqpp
         }
         catch (std::exception &e)
         {
-          std::throw_with_nested(actor_initialization_exception());
+#ifndef WIN32
+			std::throw_with_nested(actor_initialization_exception());
+#endif
         }
       }
       else

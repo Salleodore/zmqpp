@@ -139,7 +139,11 @@ endif() # ZMQPP_BUILD_SHARED
 
 # We need to link zmqpp to ws2_32 on windows for the implementation of winsock2.h
 if(WIN32)
-	target_link_libraries(zmqpp ws2_32)
+	if (ZMQPP_BUILD_STATIC)
+		target_link_libraries(zmqpp-static ws2_32)
+	else()
+		target_link_libraries(zmqpp ws2_32)
+	endif()
 endif() # WIN32
 
 include(GenerateExportHeader)
