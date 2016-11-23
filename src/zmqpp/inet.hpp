@@ -24,6 +24,9 @@
 /** \todo cross-platform version of including headers. */
 // We get htons and htonl from here
 #ifdef _WIN32
+#	if !defined(NOMINMAX) && defined(_MSC_VER)
+#		define NOMINMAX
+#	endif
 #include <WinSock2.h>
 #else
 #include <netinet/in.h>
